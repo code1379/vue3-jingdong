@@ -1,0 +1,53 @@
+<template>
+  <div class="header">
+    <div class="header__left">
+      <slot name="left"></slot>
+    </div>
+    <div class="header__center" :style="{ 'text-align': textAlign }">
+      <slot name="center"></slot>
+    </div>
+    <div class="header__right">
+      <slot name="right"></slot>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "JDHeader",
+  props: {
+    textAlign: String,
+  },
+  setup() {
+    return {};
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.header__left >>> .iconfont {
+  font-size: 0.3rem !important;
+}
+.header {
+  display: flex;
+  height: 0.44rem;
+  color: #333;
+  &__left,
+  &__right {
+    min-width: 0.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .iconfont {
+      font-size: .2rem;
+    }
+  }
+  &__center {
+    flex: 1;
+    line-height: 0.44rem;
+    text-align: center;
+    font-size: 0.16rem;
+  }
+}
+</style>

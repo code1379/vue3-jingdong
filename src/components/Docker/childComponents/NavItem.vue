@@ -4,6 +4,7 @@
     :class="{ 'nav__item--active': isActive }"
     @click="handleClick"
   >
+    <!-- <i :class="className" style="font-size: .2rem;"></i> -->
     <i :class="className"></i>
     <div class="nav__item__title">{{ title }}</div>
   </div>
@@ -26,7 +27,7 @@ export default {
     const route = useRoute();
     console.log(route.path);
 
-    const className = computed(() => `iconfont ${props.iconClass}`);
+    const className = computed(() => `icon iconfont ${props.iconClass}`);
     const isActive = computed(() => route.path === props.path);
     const handleClick = () => {
       router.push(props.path);
@@ -43,24 +44,24 @@ export default {
 <style lang="scss" scoped>
 .nav {
   &__item {
-    padding-top: .1rem;
+    padding-top: 0.1rem;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    .iconfont {
+      font-size: 0.2rem;
+    }
     &--active {
       color: #1fa4fc;
     }
     &__title {
-      font-size: .2rem;
-      transform: scale(.5);
+      font-size: 0.2rem;
+      transform: scale(0.5);
       transform-origin: center top;
     }
-  }
-  
-  .iconfont {
-    font-size: 0.2rem;
   }
 }
 </style>
