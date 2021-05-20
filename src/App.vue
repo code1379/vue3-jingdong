@@ -1,10 +1,18 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="content">
+    <router-view />
   </div>
-  <router-view />
+  <Docker />
 </template>
+<script>
+import Docker from "@/components/Docker";
+export default {
+  name: "App",
+  components: {
+    Docker,
+  },
+};
+</script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 </style>

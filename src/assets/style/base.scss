@@ -1,0 +1,18 @@
+html {
+  font-size: 100px;
+}
+
+#app {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  .content {
+    flex: 1;
+  }
+}
+
+
+body {
+  font-size: .12rem;
+}

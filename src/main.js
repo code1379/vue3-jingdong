@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "normalize.css";
-import "./assets/style/base.css";
+import "./assets/style/main.scss";
 
 createApp(App)
   .use(store)
