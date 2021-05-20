@@ -54,7 +54,7 @@ export default {
   bottom: 0;
   left: 0; */
   display: flex;
-  height: 49px;
+  height: .49rem;
   box-shadow: 0 -1px 1px 0 #f1f1f1;
 }
 </style>

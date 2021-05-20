@@ -5,7 +5,7 @@
     @click="handleClick"
   >
     <i :class="className"></i>
-    <div class="title">{{ title }}</div>
+    <div class="nav__item__title">{{ title }}</div>
   </div>
 </template>
 
@@ -43,6 +43,7 @@ export default {
 <style lang="scss" scoped>
 .nav {
   &__item {
+    padding-top: .1rem;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -50,6 +51,11 @@ export default {
     justify-content: center;
     &--active {
       color: #1fa4fc;
+    }
+    &__title {
+      font-size: .2rem;
+      transform: scale(.5);
+      transform-origin: center top;
     }
   }
   

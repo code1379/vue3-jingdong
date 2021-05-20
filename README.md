@@ -1,24 +1,7 @@
-# vue3-jingdong
 
-## Project setup
-```
-yarn install
-```
+## 需要注意的点
+1. 导航栏样式 关于 B__E--M 
+   class="docker__item"
+   class="docker__item--active"
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+   docker__item 和 docker__item--active 是两个不同的类
