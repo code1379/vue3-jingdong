@@ -28,6 +28,7 @@ export default {
 @import "@/assets/style/variables.scss";
 @import "@/assets/style/mixin.scss";
 .header {
+  background: #fff;
   display: flex;
   height: 0.44rem;
   color: $content-font-color;
