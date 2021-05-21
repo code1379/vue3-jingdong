@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header__left">
-      <slot name="left"></slot>
+      <slot name="left" class="header__left__slot"></slot>
     </div>
     <div class="header__center" :style="{ 'text-align': textAlign }">
       <slot name="center"></slot>
@@ -25,9 +25,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header__left >>> .iconfont {
-  font-size: 0.3rem !important;
-}
 .header {
   display: flex;
   height: 0.44rem;
@@ -39,9 +36,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    .iconfont {
+    /* 插槽中的 iconfont 设置样式无效 */
+    /* .iconfont {
       font-size: .2rem;
-    }
+    } */
   }
   &__center {
     flex: 1;
