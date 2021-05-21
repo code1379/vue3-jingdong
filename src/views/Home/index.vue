@@ -12,8 +12,8 @@
     </JDHeader>
     <div class="top-wrapper">
       <Search placeholder="山姆会员商店优惠商品" />
-      <Banner/>
-      <NavBar/>
+      <Banner />
+      <NavBar />
     </div>
   </div>
 </template>
@@ -21,17 +21,23 @@
 <script>
 import JDHeader from "@/components/JDHeader";
 import Search from "@/components/Search";
-import Banner from './childComps/Banner'
-import NavBar from './childComps/NavBar'
+import Banner from "./childComps/Banner";
+import NavBar from "./childComps/NavBar";
+
+import { getNearByMarkets } from "@/service/home";
+
 export default {
   name: "Home",
   components: {
     JDHeader,
     Search,
     Banner,
-    NavBar
+    NavBar,
   },
   setup() {
+    getNearByMarkets().then((res) => {
+      console.log(res);
+    });
     return {};
   },
 };
@@ -45,12 +51,11 @@ export default {
   background-color: #f1f1f1;
   .top-wrapper {
     background-color: #fff;
-    padding: 0 0.18rem .16rem .18rem;
+    padding: 0 0.18rem 0.16rem 0.18rem;
     .search {
       margin-bottom: 0.12rem;
     }
     .banner {
-
     }
   }
 }
