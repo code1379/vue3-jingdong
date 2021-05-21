@@ -15,6 +15,7 @@
       <Banner />
       <NavBar />
     </div>
+    <NearBy/>
   </div>
 </template>
 
@@ -23,8 +24,7 @@ import JDHeader from "@/components/JDHeader";
 import Search from "@/components/Search";
 import Banner from "./childComps/Banner";
 import NavBar from "./childComps/NavBar";
-
-import { getNearByMarkets } from "@/service/home";
+import NearBy from "./childComps/NearBy";
 
 export default {
   name: "Home",
@@ -33,11 +33,9 @@ export default {
     Search,
     Banner,
     NavBar,
+    NearBy,
   },
   setup() {
-    getNearByMarkets().then((res) => {
-      console.log(res);
-    });
     return {};
   },
 };

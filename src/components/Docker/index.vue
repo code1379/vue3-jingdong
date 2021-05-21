@@ -56,5 +56,6 @@ export default {
   display: flex;
   height: .49rem;
   box-shadow: 0 -1px 1px 0 #f1f1f1;
+  border-top: 1px solid #f1f1f1;
 }
 </style>

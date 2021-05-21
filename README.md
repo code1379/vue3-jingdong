@@ -21,4 +21,7 @@
     <i class="" style="font-size: .2rem;"/>
    </template>
    ```
-   
+3. axios 获取到数据之后
+   1. 需要修改数据，数据改变页面也要发生改变
+   2. 所以数据必须时响应式的。ref 或者 reactive
+   3. 我们使用 ref
