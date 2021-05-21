@@ -42,6 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/style/variables.scss";
 .nav {
   &__item {
     padding-top: 0.1rem;
@@ -55,7 +56,7 @@ export default {
       font-size: 0.2rem;
     }
     &--active {
-      color: #1fa4fc;
+      color: $active-color;
     }
     &__title {
       font-size: 0.2rem;

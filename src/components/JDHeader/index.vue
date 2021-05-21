@@ -25,10 +25,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/style/variables.scss";
+@import "@/assets/style/mixin.scss";
 .header {
   display: flex;
   height: 0.44rem;
-  color: #333;
+  color: $content-font-color;
   &__left,
   &__right {
     min-width: 0.5rem;
@@ -42,6 +44,7 @@ export default {
     } */
   }
   &__center {
+    @include text-nowrap;
     flex: 1;
     line-height: 0.44rem;
     text-align: center;
