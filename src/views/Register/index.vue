@@ -30,37 +30,69 @@
     <div class="function" @click="goToLoginPage">
       <span>已有账号，去登录</span>
     </div>
+
+    <Toast v-if="show" :message="message"/>
   </div>
 </template>
 
 <script>
 import { reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
+
+import Toast, { useShowToastEffect } from "@/components/Toast";
+
+const useRegisterEffect = (showToast) => {
+  const router = useRouter();
+  const user = reactive({
+    phone: "",
+    pwd1: "",
+    pwd2: "",
+  });
+
+  const handleSubmit = () => {
+    if (user.pwd1 !== user.pwd2) {
+      showToast("两次输入的密码不同");
+    } else {
+      router.push("/login");
+    }
+  };
+
+  const { phone, pwd1, pwd2 } = toRefs(user);
+  return {
+    phone,
+    pwd1,
+    pwd2,
+    handleSubmit,
+  };
+};
+
+const useRouterEffect = () => {
+  const router = useRouter();
+  const goToLoginPage = () => {
+    router.push("/login");
+  };
+  return {
+    goToLoginPage,
+  };
+};
+
 export default {
   name: "Register",
+  components: {
+    Toast,
+  },
   setup() {
-    const router = useRouter();
-    const user = reactive({
-      phone: "",
-      pwd1: "",
-      pwd2: "",
-    });
-
-    const handleSubmit = () => {
-      if (user.pwd1 !== user.pwd2) {
-        alert("两次输入的密码不同");
-      }
-      console.log("handleSubmit");
-      router.push("/login");
-    };
-
-    const goToLoginPage = () => {
-      router.push("/login");
-    };
+    const { goToLoginPage } = useRouterEffect();
+    const { show, showToast, message } = useShowToastEffect();
+    const { phone, pwd1, pwd2, handleSubmit } = useRegisterEffect(showToast);
     return {
-      ...toRefs(user),
+      phone,
+      pwd1,
+      pwd2,
+      message,
       handleSubmit,
       goToLoginPage,
+      show,
     };
   },
 };

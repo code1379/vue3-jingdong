@@ -1,11 +1,14 @@
 <template>
   <div class="login">
+    <teleport to="body">
+      <Toast :message="message" v-if="show" />
+    </teleport>
     <img
       class="login__avatar"
       src="http://www.dell-lee.com/imgs/vue3/user.png"
       alt=""
     />
-    <form class="login__form" @submit="handleSubmit">
+    <form class="login__form" @submit="handleLogin">
       <!-- <input class="form__input" type="text" v-model="phone.value" @blur="validatePhoneNumber" />
       <div class="phone-error" v-if="phone.error">{{phone.error}}</div> -->
       <input
@@ -32,65 +35,87 @@
 <script>
 import { reactive, toRefs } from "vue";
 import { useRouter } from "vue-router";
-
 import { login } from "@/service/login";
 
-const useLoginEffect = async (phone, password) => {
-  const _login = async () => {
-    const res = await login(phone, password);
-    if (res.errno === 0) {
-      console.log("useLoginEffect 执行完毕");
-      localStorage.isLogin = true;
+import Toast, { useShowToastEffect } from "@/components/Toast";
+
+const useLoginEffect = (showToast) => {
+  const router = useRouter();
+  // 可以将用户数据卸载 loginEffect 中
+  const data = reactive({
+    phone: "",
+    password: "",
+  });
+
+  const handleLogin = async () => {
+    try {
+      const res = await login(phone, password);
+      if (res?.errno === 0) {
+        localStorage.isLogin = true;
+        router.push("/");
+      } else {
+        showToast("登陆失败");
+      }
+    } catch (err) {
+      showToast("网络异常");
     }
   };
-  await _login();
+
+  const { phone, password } = toRefs(data);
+
+  return {
+    phone,
+    password,
+    handleLogin,
+  };
 };
 
 export default {
   name: "Login",
+  components: {
+    Toast,
+  },
   setup() {
     const router = useRouter();
-    const user = reactive({
-      phone: "",
-      password: "",
-    });
 
-    const phone = reactive({
-      value: "",
-      error: "",
-      reg: /^1(3\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\d|9[0-35-9])\d{8}$/,
-    });
+    // const phone = reactive({
+    //   value: "",
+    //   error: "",
+    //   reg: /^1(3\d|4[5-9]|5[0-35-9]|6[2567]|7[0-8]|8\d|9[0-35-9])\d{8}$/,
+    // });
 
-    const validatePhoneNumber = () => {
-      console.log("validate phone number");
-      // console.log(phone.value);
-      const result = phone.reg.test(phone.value);
-      console.log(result);
-      if (!result) {
-        phone.error = "手机号格式错误";
-      } else {
-        phone.error = "";
-      }
-    };
+    // const validatePhoneNumber = () => {
+    //   console.log("validate phone number");
+    //   // console.log(phone.value);
+    //   const result = phone.reg.test(phone.value);
+    //   console.log(result);
+    //   if (!result) {
+    //     phone.error = "手机号格式错误";
+    //   } else {
+    //     phone.error = "";
+    //   }
+    // };
 
-    const validatePassword = () => {};
-    const handleSubmit = async () => {
-      console.log("handleSubmit");
-      await useLoginEffect(user.phone, user.password);
-      console.log("登陆成功，正在跳转到首页");
-      router.push({ name: "Home" });
-    };
+    // const validatePassword = () => {};
+
+    // 主要逻辑区域
+    const { show, message, showToast } = useShowToastEffect();
+    const { phone, password, handleLogin } = useLoginEffect(showToast);
 
     const goToRegisterPage = () => {
       router.push("/register");
     };
     return {
-      validatePhoneNumber,
-      validatePassword,
-      phone,
-      handleSubmit,
-      ...toRefs(user),
+      // validatePhoneNumber,
+      // validatePassword,
+      // phone,
       goToRegisterPage,
+      show,
+      message,
+
+      phone,
+      password,
+      handleLogin,
     };
   },
 };
