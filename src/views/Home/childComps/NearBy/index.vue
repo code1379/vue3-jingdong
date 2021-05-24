@@ -2,7 +2,12 @@
   <div class="nearby">
     <div class="nearby__title">附近店铺</div>
     <div class="nearby__list">
-      <div class="nearby__item" v-for="market in markets" :key="market._id">
+      <div
+        class="nearby__item"
+        v-for="market in markets"
+        :key="market._id"
+        @click="goToDetailPageById(market._id)"
+      >
         <img class="nearby__item__img" :src="market.imgUrl" alt="" />
         <div class="nearby__item__info">
           <div class="name">{{ market.name }}</div>
@@ -14,6 +19,12 @@
           <div class="slogan">{{ market.slogan }}</div>
         </div>
       </div>
+      <ShopCard
+        v-for="market in markets"
+        :key="market._id"
+        :info="market"
+        @click="handleClick($event, market._id)"
+      />
     </div>
   </div>
 </template>
@@ -21,6 +32,8 @@
 <script>
 import { getNearByMarkets } from "@/service/home";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+import ShopCard from "@/components/ShopCard";
 
 const useGetNearByMarketsEffect = () => {
   const markets = ref([]);
@@ -39,7 +52,11 @@ const useGetNearByMarketsEffect = () => {
 
 export default {
   name: "NearBy",
+  components: {
+    ShopCard,
+  },
   setup() {
+    const router = useRouter();
     const { markets } = useGetNearByMarketsEffect();
     const getChineseCount = (count) => {
       if (count > 10000) {
@@ -50,9 +67,29 @@ export default {
         return count;
       }
     };
+
+    const goToDetailPageById = (id) => {
+      router.push({
+        name: "Detail",
+        params: {
+          id,
+        },
+      });
+    };
+
+    const handleClick = (e, id) => {
+      router.push({
+        name: "Detail",
+        params: {
+          id,
+        },
+      });
+    };
     return {
       markets,
       getChineseCount,
+      goToDetailPageById,
+      handleClick,
     };
   },
 };
@@ -80,7 +117,7 @@ export default {
     &__info {
       flex: 1;
       margin-left: 0.16rem;
-      padding-bottom: .12rem;
+      padding-bottom: 0.12rem;
       font-size: 0.13rem;
       line-height: 0.18rem;
       border-bottom: 1px solid #f1f1f1;

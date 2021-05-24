@@ -11,12 +11,14 @@
    - !!! 父组件 slot 传递到组件中只有原始样式，在子组件中无法修改。
    - 既然子组件中无法修改，我们可以在父组件中进行修改。或者传递的时候直接连 style 一起传递过去
    ```scss
+   // 在父组件中写
    .icon {
     font-size: .2rem;
    }
 
    ```
    ```html
+   // 在父组件中写
    <template #left>
     <i class="" style="font-size: .2rem;"/>
    </template>
@@ -25,3 +27,10 @@
    1. 需要修改数据，数据改变页面也要发生改变
    2. 所以数据必须时响应式的。ref 或者 reactive
    3. 我们使用 ref
+
+## 商家详情 
+样式穿透 
+需要注意：
+>>> 只作用于css
+::v-deep 只作用于sass
+/deep/ 只作用于less

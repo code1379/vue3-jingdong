@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="header__left">
+    <div class="header__left" @click="handleLeftClick">
       <slot name="left" class="header__left__slot"></slot>
     </div>
     <div class="header__center" :style="{ 'text-align': textAlign }">
@@ -18,8 +18,14 @@ export default {
   props: {
     textAlign: String,
   },
-  setup() {
-    return {};
+  emits: ["leftClick"],
+  setup(props, { emit }) {
+    const handleLeftClick = () => {
+      emit("leftClick");
+    };
+    return {
+      handleLeftClick,
+    };
   },
 };
 </script>
@@ -30,6 +36,7 @@ export default {
 .header {
   background: #fff;
   display: flex;
+  align-items: center;
   height: 0.44rem;
   color: $content-font-color;
   &__left,

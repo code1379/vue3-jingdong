@@ -15,7 +15,7 @@
       <Banner />
       <NavBar />
     </div>
-    <NearBy/>
+    <NearBy />
   </div>
 </template>
 

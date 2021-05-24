@@ -50,6 +50,11 @@ const routes = [
         next();
       }
     }
+  },
+  {
+    path: "/detail/:id",
+    name: "Detail",
+    component: () => import(/* webpackChunkName: "mine" */ "../views/Detail")
   }
 ];
 
